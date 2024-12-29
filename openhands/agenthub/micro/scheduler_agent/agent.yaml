@@ -1,0 +1,49 @@
+name: SchedulerAgent
+description: "Manages task scheduling using APScheduler, supporting various scheduling patterns and persistence"
+container: python:3.12.3-bookworm
+inputs:
+  task: string
+  schedule_type: string
+  schedule_params: dict
+  job_id: string
+  action: string
+outputs:
+  result: string
+  job_info: dict
+examples:
+  - inputs:
+      task: "Send a daily report at 9 AM"
+      schedule_type: "cron"
+      schedule_params: {"hour": "9", "minute": "0"}
+      job_id: "daily_report"
+      action: "add"
+    outputs:
+      result: "Job scheduled successfully"
+      job_info: {"id": "daily_report", "next_run": "2024-12-30 09:00:00"}
+  - inputs:
+      task: "Backup database every 6 hours"
+      schedule_type: "interval"
+      schedule_params: {"hours": 6}
+      job_id: "db_backup"
+      action: "add"
+    outputs:
+      result: "Job scheduled successfully"
+      job_info: {"id": "db_backup", "next_run": "2024-12-29 20:00:00"}
+  - inputs:
+      task: "Run system cleanup on January 1st, 2025"
+      schedule_type: "date"
+      schedule_params: {"run_date": "2025-01-01 00:00:00"}
+      job_id: "yearly_cleanup"
+      action: "add"
+    outputs:
+      result: "Job scheduled successfully"
+      job_info: {"id": "yearly_cleanup", "next_run": "2025-01-01 00:00:00"}
+triggers:
+  - schedule
+  - scheduler
+  - cron
+  - interval
+  - apscheduler
+dependencies:
+  - apscheduler>=3.10.4
+  - pytz>=2023.3
