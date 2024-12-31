@@ -1,0 +1,33 @@
+name: DockerAgent
+description: "Specializes in Docker container management, Dockerfile creation, and Docker Compose configurations"
+container: docker:24.0.7-cli
+inputs:
+  task: string
+  context: string
+outputs:
+  result: string
+  files_modified: list[string]
+examples:
+  - inputs:
+      task: "Create a Dockerfile for a Node.js application"
+      context: "Need a Dockerfile for a Node.js app that runs on port 3000"
+    outputs:
+      result: "Created Dockerfile with Node.js configuration"
+      files_modified: ["Dockerfile"]
+  - inputs:
+      task: "Set up a multi-container environment with Docker Compose"
+      context: "Need a web app with Node.js backend and MongoDB database"
+    outputs:
+      result: "Created docker-compose.yml with web and db services"
+      files_modified: ["docker-compose.yml"]
+  - inputs:
+      task: "Optimize an existing Dockerfile"
+      context: "Current Dockerfile is slow to build and produces large images"
+    outputs:
+      result: "Optimized Dockerfile with multi-stage builds and reduced layers"
+      files_modified: ["Dockerfile"]
+triggers:
+  - docker
+  - container
+  - dockerfile
+  - compose
