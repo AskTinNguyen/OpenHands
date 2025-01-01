@@ -1,11 +1,5 @@
 from smolagents import MultiStepAgent, HfApiModel
-from .tools import (
-    get_eth_yield_strategies,
-    analyze_gas_costs,
-    calculate_roi,
-    analyze_risk_score,
-    compare_protocols
-)
+from .tools.defi_tools import DeFiTools
 
 class DeFiAdvisorAgent:
     """
